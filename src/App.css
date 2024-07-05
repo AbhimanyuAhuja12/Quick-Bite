@@ -1,0 +1,219 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid gray;
+}
+.logo{
+    width: 100px;
+}
+.nav-items >ul{
+    display: flex;
+    list-style-type: none;
+    font-size: 20px;
+    
+}
+.nav-items>ul>li{
+    padding: 10px;
+    margin: 10px;
+}
+.res-card{
+    /* width: 278px;
+    height: 287px;
+    border: 1px solid black;
+    background-color: lightgray;
+    display: grid;
+    cursor: pointer;
+    gap: 12px;
+    grid-auto-flow: row;
+    justify-content: stretch; 
+    align-items: center;
+    border-radius: 7px;*/
+    margin: 10px; 
+    display: flex;
+    flex-direction: column;
+    width: 230px;
+    /* height: 291px; */
+    max-height: 330px;
+    background-color: var(--white);
+    border-radius: 10px;
+    box-shadow: 0px 10px 12px rgba(0, 0, 0, 0.08),
+      -4px -4px 12px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: all 0.3s;
+    cursor: pointer;
+    box-sizing: border-box;
+    padding: 10px;
+}
+.res-card:hover{
+    transform: translateY(-10px);
+  box-shadow: 0px 20px 20px rgba(0, 0, 0, 0.1),
+    -4px -4px 12px rgba(0, 0, 0, 0.08);
+}
+
+
+.search{
+     padding: 10px;
+    display: flex;
+    justify-content: center; 
+    border-radius: 10px;
+   
+}
+
+
+.res-logo{
+    /* position: absolute; */
+    /* top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-radius: 16px; */
+    width: 100%;
+    height: 120%;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    background-color: rgb(165, 165, 165);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    
+   
+}
+.res-name{
+   /* margin: 5px;
+    -webkit-font-smoothing: antialiased;
+    font-family: Basis_Grotesque_Pro_Bold;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: -0.3px;
+    color: rgba(2, 6, 12, 0.75);
+    overflow: hidden;
+    width: 100%;
+    display: -webkit-box;
+    overflow-wrap: break-word;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;*/
+    margin: 5px;
+  font-size: 17px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-weight: 600;
+  color: #1797b8;
+  cursor: default;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  height: 42px;
+
+    
+}
+.res-rating{
+    display: grid;
+    align-items: center;
+    font-family: Basis_Grotesque_Pro_Bold;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    letter-spacing: -0.3px;
+    color: rgba(2, 6, 12, 0.75);
+    margin-top: 18px;
+}
+
+.res-details{
+    -webkit-font-smoothing: antialiased;
+    font-family: Basis_Grotesque_Pro_Bold;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    letter-spacing: 0.3px;
+    color: rgba(2, 6, 12, 0.75);
+    overflow: hidden;
+    width: 100%;
+    display:flex;
+    margin-top: 7px;
+    justify-content:space-evenly;
+
+}
+
+.foodtype{
+    display: grid;
+    align-items: center;
+    margin-top: 2px;
+    gap: 2px;
+    
+}
+.resturant-container{
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+.res-external-container{
+    -webkit-box-orient: vertical;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  margin: 0;
+  font-size: 13px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  color: #1797b8;
+  cursor: default;
+  width: 100%;
+  height: 100%;
+}
+
+.search-bar{
+    height: 30px;
+    width:40%;
+    border: solid 1px gray;
+    
+    
+    
+}
+.filter-btn{
+    margin: 10px;
+    cursor: pointer;
+}
+
+.shimmer-card{
+    background-color:#f0f0f0;
+    margin: 10px; 
+    display: flex;
+    flex-direction: column;
+    width: 230px;
+    height: 300px;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    box-sizing: border-box;
+    padding: 10px;
+
+   
+    
+}
+
+.shimmer-container{
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+
+.login-button{
+    padding: 0 20px;
+    cursor: pointer;
+    margin: 5px;
+    border: none;
+    background-color: white;
+    
+}
+
+.root {
+    padding-top: rem(80px);
+    padding-bottom: rem(80px);
+  } 
