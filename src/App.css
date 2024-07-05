@@ -1,48 +1,100 @@
+
+:root {
+    --header-bg-color: rgb(1, 163, 144);
+    --footer-bg-color: rgb(1, 163, 144);
+    --body-bg-color: #e3e3e3;
+    --input-bg: #f2f2f2;
+    --input-bg-focus: #dbdbdb;
+    --text-color: #000;
+    --light-green: #00ad1d;
+    --dark-green: #016034;
+    --orange: #d97919;
+    --light-orange: #ffaf60;
+    --dark-orange: #c26100;
+    --x-dark-orange: rgb(157, 42, 1);
+    --light-red: rgb(236, 56, 56);
+    --white: #fff;
+    --light-black: rgb(23, 23, 23);
+    --light-blue: #0463ac;
+    --dark-blue: #070062;
+  }
+  * {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    font-family: "PT Sans", "Lato", Calibri, sans-serif;
+  }
+  
+  /* all link CSS */
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 .header{
+    /* display: flex;
+    justify-content: space-between;
+    border: 1px solid gray; */
     display: flex;
     justify-content: space-between;
-    border: 1px solid gray;
+    align-items: center;
+    width: 100vw;
+    height: 80px;
+    background-color: var(--header-bg-color);
+    border-radius: 5px;
+    box-shadow: -1px 4px 20px 14px rgba(0, 0, 0, 0.2);
+    color: var(--text-color);
+    font-weight: bold;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    overflow-y: hidden;
 }
 .logo{
+    /* width: 100px; */
+    padding: 10px 0 10px 15px;
     width: 100px;
 }
 .nav-items >ul{
-    display: flex;
+    /* display: flex;
     list-style-type: none;
-    font-size: 20px;
+    font-size: 20px; */
+    list-style-type: none;
+    display: flex;
+    margin-right: 30px;
+    align-items: center;
+    justify-content: space-between;
     
 }
 .nav-items>ul>li{
     padding: 10px;
-    margin: 10px;
+    /* margin: 10px; */
 }
+.nav-items > ul > li:hover {
+    background-color: var(--orange);
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+.login-button {
+    color: var(--light-text-color);
+    font-size: inherit;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    border-radius: 5px;
+    font-weight: 700;
+}
+
+
 .res-card{
-    /* width: 278px;
-    height: 287px;
-    border: 1px solid black;
-    background-color: lightgray;
-    display: grid;
+    width: 240px;
     cursor: pointer;
-    gap: 12px;
-    grid-auto-flow: row;
-    justify-content: stretch; 
-    align-items: center;
-    border-radius: 7px;*/
-    margin: 10px; 
-    display: flex;
-    flex-direction: column;
-    width: 230px;
-    /* height: 291px; */
-    max-height: 330px;
-    background-color: var(--white);
-    border-radius: 10px;
-    box-shadow: 0px 10px 12px rgba(0, 0, 0, 0.08),
-      -4px -4px 12px rgba(0, 0, 0, 0.08);
-    overflow: hidden;
-    transition: all 0.3s;
-    cursor: pointer;
-    box-sizing: border-box;
+    border-radius: 5px;
+    margin: 20px;
     padding: 10px;
+    box-shadow: -1px 5px 10px 5px rgba(112, 112, 112, .2);
 }
 .res-card:hover{
     transform: translateY(-10px);
@@ -68,7 +120,7 @@
     height: 100%;
     position: relative;
     border-radius: 16px; */
-    width: 100%;
+    /* width: 100%;
     height: 120%;
     border-radius: 10px;
     margin-bottom: 12px;
@@ -76,7 +128,9 @@
     background-color: rgb(165, 165, 165);
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center; */
+    width: 100%;
+    border-radius: 10px;
     
     
    
@@ -96,7 +150,7 @@
     overflow-wrap: break-word;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;*/
-    margin: 5px;
+    /* margin: 5px;
   font-size: 17px;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
@@ -108,10 +162,14 @@
   display: -webkit-box;
   -webkit-line-clamp: 1;
   line-clamp: 1;
-  height: 42px;
+  height: 42px; */
+  color: var(--light-text-title);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
 
     
-}
 .res-rating{
     display: grid;
     align-items: center;
@@ -141,16 +199,27 @@
 }
 
 .foodtype{
-    display: grid;
+    /* display: grid;
     align-items: center;
     margin-top: 2px;
-    gap: 2px;
+    gap: 2px; */
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-weight: lighter;
+    overflow: hidden;
+
     
 }
 .resturant-container{
-    display: flex;
+    /* display: flex;
+    flex-wrap: wrap; */
+    width: auto;
     flex-wrap: wrap;
-    
+    justify-content: center;
+    align-self: stretch;
+    align-items: center;
+    display: flex;
+
 }
 .res-external-container{
     -webkit-box-orient: vertical;
@@ -204,16 +273,4 @@
     
 }
 
-.login-button{
-    padding: 0 20px;
-    cursor: pointer;
-    margin: 5px;
-    border: none;
-    background-color: white;
-    
-}
 
-.root {
-    padding-top: rem(80px);
-    padding-bottom: rem(80px);
-  } 
