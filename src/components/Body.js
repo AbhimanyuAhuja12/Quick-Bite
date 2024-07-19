@@ -1,47 +1,43 @@
 import ResturantCard from "./ResturantCard";
-// import resList from "../utils/mockData";
 import { useState ,useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
-
+import useOnlineStatus from "../utils/useOnlineStatus.js"
+// import useCarouselData from "../utils/useCarouselData";
 
 
 
 
 
 const Body =()=>{
-  // Local state variable - Super Powerful variable
   const [listOfResturants, setlistOfResturant]= useState([]);
   const [filteredResturant , setfilteredResturant] =useState([]);
 
   const [ searchText , setsearchText] =useState("");
 
-  // console.log("body rendered")
+// const [json] = useCarouselData();
 
 useEffect(()=>{
  fetchData();
 }, []);
 
  const fetchData =async()=>{
-  // const data = await fetch("https://www.swiggy.com/mapi/homepage/getCards?lat=28.6578133&lng=77.28181959999999");
   const data =await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.6578133&lng=77.28181959999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
   
 
   const json = await data.json();
   console.log(json);
-  // optional chaining
 
-  // setlistOfResturant(json.data.success.cards[3].gridWidget.gridElements.infoWithStyle.restaurants);
 
   setlistOfResturant(json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants);
   setfilteredResturant(json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants);
-  // console.log(json.data.success.cards[3].gridWidget.gridElements.infoWithStyle.restaurants);
- };
+ 
+ }
 
- // conditional rendering 
-// if(listOfResturants.length===0){ 
-//   return <Shimmer />
-// }
+
+
+const OnlineStatus=useOnlineStatus();
+if(OnlineStatus===false) return (<h1>Looks like you are offline!! please check your internet connection</h1>);
 
     return listOfResturants.length===0 ? <Shimmer /> : (
        <div className="body">
@@ -91,5 +87,6 @@ useEffect(()=>{
        </div>
     );
 };
+
 
 export default Body;
