@@ -29,7 +29,7 @@ import UserClass from './UserClass'
 function About() {
   return (
     <div>
-      <h1>about</h1>
+      <h1 className=''>about</h1>
 
    <UserClass name ={'ABHIMANYU AHUJA'} location={'dehradhun'}/> 
     </div>
