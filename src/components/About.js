@@ -22,18 +22,15 @@
 //   export default About;
 
 
-import React from 'react'
-import User from "./Users"
-import UserClass from './UserClass'
+import UserClass from "./UserClass"
+// import React from "react";
 
-function About() {
-  return (
-    <div>
-      <h1 className=''>about</h1>
-
-   <UserClass name ={'ABHIMANYU AHUJA'} location={'dehradhun'}/> 
+const about=()=>{
+  return(
+    <div >
+      <UserClass/>
+      
     </div>
-  )
+  );
 }
-
-export default About
+export default about;
