@@ -22,13 +22,13 @@
 //   export default About;
 
 
-import UserClass from "./UserClass"
+import UserDetails from "./UserDetails"
 // import React from "react";
 
 const about=()=>{
   return(
     <div >
-      <UserClass/>
+      <UserDetails/>
       
     </div>
   );
