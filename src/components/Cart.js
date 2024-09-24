@@ -1,51 +1,54 @@
-import {useSelector} from "react-redux";
-import FoodItem from "./FoodItem";
-import { useState } from 'react';
-import {total} from "./FoodItem";
+import { useDispatch, useSelector } from "react-redux";
+import ItemList from "./ItemList";
+import { clearCart } from "../utils/cartSlice";
 
+const Cart = () => {
+  const cartItems = useSelector((store) => store.cart.items);
 
-const Cart = () => { 
-    
-    const cartItems = useSelector(store =>store.cart.items);
-    
-    
-    const [isOrder, setIsOrder] = useState(false);
-    const handleOrderClick = () => { 
-        if(!cartItems.length){
-            alert("Please add Value to cart");
-          return;
-        }
-        setIsOrder(true);
-      };
-      const total = cartItems.reduce((sum, item) => {
-        return sum + (item.price ? item.price : item.defaultPrice) / 100;
-      }, 0);
-    
-     
-    return (
-        <div className=' flex flex-col justify-center my-10 sm:w-2/3   lg:w-1/3 mx-auto    shadow-zinc-400  shadow-lg p-4   '>
-            
-           {
-            cartItems.map((item) =>(
-                <FoodItem key= {item.id} {...item}  />
-            
-                // {total +=(item.price ? item.price : item.defaultPrice)/100}  
-            ))
-           } 
-            <div className="font-extrabold "> 
-            <hr className=" shadow-black shadow"/>
-                <h3 className="text-red-500  flex justify-end
-                 shadow-black shadow-sm "> Total in INR - {total}</h3>
-              </div> 
-              <button className="flex justify-end">
-                 <span className="bg-orange-500 rounded-lg p-1 m-2" 
-                 onClick={handleOrderClick}
-              >Order Now  </span></button> 
-             {isOrder && (
-        <div className="mt-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative">
-          Your order has been placed successfully!
-        </div>)}
-        </div> 
-    )
-}
+  const dispatch = useDispatch();
+
+  const handleClearCart = () => {
+    dispatch(clearCart());
+  };
+
+  // Calculate total price
+  const totalPrice = cartItems.reduce((total, item) => {
+    const price =
+      item.card.info.price ? item.card.info.price / 100 : item.card.info.defaultPrice / 100;
+    return total + price;
+  }, 0);
+
+  return (
+    <div className="text-center m-4 p-4">
+      <h1 className="font-bold text-2xl">Cart</h1>
+      <button
+        className="p-2 m-2 rounded-lg text-white bg-black"
+        onClick={handleClearCart}
+      >
+        Clear Cart
+      </button>
+      {cartItems.length === 0 && <h1>Cart is Empty. Add Items to Cart</h1>}
+
+      {/* Display Cart Items */}
+      <div className="w-6/12 m-auto">
+        <ItemList items={cartItems} />
+      </div>
+
+      {/* Display Total Price */}
+      {cartItems.length > 0 && (
+        <div className="font-bold text-xl mt-4">
+          Total Price: ₹{totalPrice}
+        </div>
+      )}
+
+      {/* Order Now Button */}
+      {cartItems.length > 0 && (
+        <button className="p-3 mt-4 bg-green-500 text-white rounded-lg">
+          Order Now
+        </button>
+      )}
+    </div>
+  );
+};
+
 export default Cart;

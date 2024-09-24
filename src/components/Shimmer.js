@@ -1,5 +1,4 @@
 
-//import RestrauntCard from "../components/RestrauntMenu";
 const Shimmer = () => {
     return (
         <>
@@ -23,4 +22,3 @@ const Shimmer = () => {
     );
 }
 export default Shimmer;
-//shadow-stone-500
