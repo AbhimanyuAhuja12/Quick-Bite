@@ -1,6 +1,8 @@
+import UserClass from "./UserClass";
 
 const About = () => {
   return (
+    <>
       <div className="w-full h-auto mt-5 p-14 text-black mb-2 font-Poppins sm:p-4 ">
           <h1 className="font-bold text text-4xl"> Some important information about project </h1>
           <br />
@@ -26,6 +28,10 @@ const About = () => {
               <li>➡️ Tailwind CSS for Styling</li>
           </ul>
       </div>
+      <div>
+        <UserClass/>
+      </div>
+      </>
   )
 }
 export default About;

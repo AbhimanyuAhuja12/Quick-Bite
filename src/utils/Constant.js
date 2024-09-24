@@ -35,5 +35,7 @@ export const LOGO_URL=
 export const errorImage="https://www.searchenginejournal.com/wp-content/uploads/2024/02/404-error-page-examples-65ccb7d85bc41-sej-1440x810.png";
 
 
-export const RestaurantApi="https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=28.6578133&lng=77.28181959999999&restaurantId="
 
+
+
+export const RESTAURANT_UPDATE_API = 'https://food-app-be-gamma.vercel.app/api/update'
