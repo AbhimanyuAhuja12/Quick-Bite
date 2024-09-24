@@ -1,17 +1,13 @@
-import { useRouteError } from "react-router-dom";
-import { errorImage } from "../utils/constants";
-const Error=()=>{
+import { useRouteError } from "react-router-dom"
 
-    const err =useRouteError();
-    console.log(err);
-    return(
+const Error = () => {
+    const err = useRouteError();
+    return (
         <div>
-            {/* /* <h1>oops !!</h1>
-            <h2>{err.status}: {err.statusText}</h2> */ }
-            <img src={errorImage} alt={err.status} />
+            <h1 className="flex justify-center text-xl">oops!</h1>
+            <h2 className="flex justify-center text-xl">Something went wrong!!</h2>
+            <h2 className="flex justify-center text-xl">{err.status + ":" + err.statusText}</h2>
         </div>
-    )
-}
+    );
+};
 export default Error;
-
-

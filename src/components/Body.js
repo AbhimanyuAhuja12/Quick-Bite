@@ -1,100 +1,109 @@
-import ResturantCard,{withPromotedLabel} from "./ResturantCard";
-import { useState ,useEffect } from "react";
+import RestrauntCard from "./RestaurantCard";
+import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
-import useOnlineStatus from "../utils/useOnlineStatus"
+import { filterData } from "../utils/helper";
 
 
 
 
 
+const Body = () => {
+  const [allRestaurant, setAllRestaurant] = useState("");
+  const [searchText, setSearchText] = useState("");
+  const [filterdRestaurant, setFilterdRestaurant] = useState([]);
 
-const Body =()=>{
-  // Local state variable - Super Powerful variable
-  const [listOfResturants, setlistOfResturant]= useState([]);
-  const [filteredResturant , setfilteredResturant] =useState([]);
+  useEffect(() => {
+    getRestaurants();
+  }, []);
 
-  const [ searchText , setsearchText] =useState("");
+  const getRestaurants = async () => {
+    try {
+      const data = await fetch(
+        "https://foodfire.onrender.com/api/restaurants?lat=21.1702401&lng=72.83106070000001&page_type=DESKTOP_WEB_LISTING");
 
-
-  const RestauranCardPromoted =withPromotedLabel(ResturantCard);
-
-
-useEffect(()=>{
- fetchData();
-}, []);
-
- const fetchData =async()=>{
-  
-  const data =await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.6578133&lng=77.28181959999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
-  
-
-  const json = await data.json();
-  console.log(json);
+      const json = await data.json();
 
 
-  setlistOfResturant(json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants);
-  setfilteredResturant(json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants);
- };
+      // was showing an error of data fatching because sometime data coming from cards[1] sometime cards[2] and different on other times so me make a function and check which value of i gives data in cards[i]
+      async function checkJsonData(jsonData) {
+
+        for (let i = 0; i < jsonData?.data?.cards.length; i++) {
+
+          // initialize checkData for Swiggy Restaurant data
+          let checkData = json?.data?.cards[i]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+
+          // if checkData is not undefined then return it
+          if (checkData !== undefined) {
+            return checkData;
+          }
+        }
+      }
+      // call the checkJsonData() function which return Swiggy Restaurant data
+      const resData = await checkJsonData(json);
+
+      // update the state variable restaurants with Swiggy API data
+      setAllRestaurant(resData);
+      setFilterdRestaurant(resData);
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
 
 
 
 
-const OnlineStatus=useOnlineStatus();
-if(OnlineStatus===false) return (<h1>Looks like you are offline!! please check your internet connection</h1>);
 
-    return listOfResturants.length===0 ? <Shimmer /> : (
-       <div className="body  ">
+  return (allRestaurant?.length === 0) ? (
+    <Shimmer />
 
-      <div className="flex">
-       <div className=" flex search m-4  p-4 f fa-align-justify">
-        <input className="search-bar border:border-solid" type="text" 
-        value={searchText} onChange={(e)=>{setsearchText(e.target.value)}} placeholder="search here" />
-        <button  className="px-4 py-2 bg-green-500 rounded-lg" id="submit" onClick={()=>{
-          // filter logic
-         
-
-          const filteredResturant =listOfResturants.filter((res)=> res.info.name.toLowerCase().includes(searchText.toLowerCase()));
-         
-          setfilteredResturant(filteredResturant);
-          
-
-         }}
-         >Search</button> 
-       </div>
-       
-       <div className="filter flex items-center">
-        <button className="filter-btn bg-gray-300 rounded-lg w-48" onClick={()=>{
-          //filter logic here
-          const filteredList =listOfResturants.filter((res)=> res.info.avgRating>4.2);
-          
-          setlistOfResturant(filteredList);
-         
-
-        }}>
-        Top Rated Resturant
-           </button>
-       </div>
-       </div>
+  ) : (
+    <>
+      <div className="p-5 bg-pink-50 my-1 ">
+        <input
+          type="text"
+          className="Search-input"
+          placeholder="Search"
+          value={searchText}
+          onChange={(e) => {
+            setSearchText(e.target.value);
+          }}
+        />
 
 
-       <div className="resturant-container flex flex-wrap justify-center gap-4">
-      
-       {filteredResturant.map((resturant) => (
-        <Link key={resturant.info.id}  to={"/restaurant/" + resturant.info.id}>
-          {/* if restaurant is promoted  then add promoted label to it*/}
-          {resturant.info.promoted ? <RestauranCardPromoted resData={resturant}/>:
-          <ResturantCard resData={resturant} />} </Link>
-        ))};
-      
-         {/* console.log(resList.get(0)); */}
+        <button
+          className="p-3 m-2  bg-purple-600 text-white rounded-lg hover:bg-green-800"
+          onClick={() => {
+            const data = filterData(searchText, allRestaurant);
+            setFilterdRestaurant(data);
 
-    {/* //now listOfResturants is used for filtering only */}
+          }}
+        >Search</button>
+      </div>
+
+      <div className="resturant-list flex flex-wrap justify-center">
+        {(filterdRestaurant?.length === 0 ? <h1>No data match your filter</h1> :
+          filterdRestaurant?.map((restaurant) => {
+            return (
+              <Link
+                key={restaurant?.info.id}
+                to={"/restaurant/" + restaurant?.info.id}
+
+              >
+                <RestrauntCard  {...restaurant?.info} />
+              </Link>
+            );
+          })
+        )}
 
 
-       </div>
-       </div>
-    );
+
+      </div>
+
+    </>
+
+  )
 };
 
-export default Body;
+export default Body; 

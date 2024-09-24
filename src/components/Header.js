@@ -1,43 +1,66 @@
+
+
 import { useState } from "react";
-import { LOGO_URL } from "../utils/constants";
+import logo from "../assets/foodie.jpg";
 import { Link } from "react-router-dom";
-import useOnlineStatus from "../utils/useOnlineStatus";
+import useOnline from "../utils/useOnline";
+import React from "react";
+import { useSelector } from "react-redux";
+
+const Title = () => {
+    return (
+        <a href="/">
+            <img
+                className="h-28 p-0"
+                alt="Logo"
+                src={logo} />
+        </a>
+    );
+}
+
 
 const Header = () => {
-  const [btnNameReact, setBtnNameReact] = useState("Login");
-  const onlineStatus = useOnlineStatus();
+    const [isLoggedIn, setIsLoggedIn] = useState(true);
 
-  return (
-    <div className="Header flex items-center justify-between bg-white shadow-md py-4 px-6">
-      {/* Logo of the website */}
-      <div className="logo-container">
-        <img className="logo w-24" src={LOGO_URL} alt="Website Logo" />
-      </div>
+    const isOnline = useOnline();
+     const cartItems=useSelector(store=>store.cart.items);
+ // console.log(cartItems);
+    return (
+        <div className="flex justify-between bg-pink-400 shadow-lg ">
+            <Title />
+            <div >
+                <ul className="flex py-2 pr-2 text-2xl ">
+                    <li className="px-2   hover:text-white hover:text-xl rounded-md">
+                        <Link to="/home">Home</Link>
+                    </li>
+                    <li className="px-2 hover:text-white hover:text-m rounded-md">
+                        <Link to="/contact">Contact</Link>
+                    </li>
+                    <li className="px-2 hover:text-white hover:text-m rounded-md">
+                        <Link to="/About">About</Link>
+                    </li>
+                    <li className="px-2 hover:text-white hover:text-m rounded-md">
+                        <Link to="/cart">Cart</Link>
+                    </li>
+                    <li>{cartItems.length? cartItems.length : " "}</li>
+                      
+                </ul>
+                <div className="grid  justify-items-start">
+                    <ul className="status px-1" >
 
-      {/* Menu items */}
-      <div className="nav-items">
-        <ul className="flex items-center space-x-6 text-lg font-semibold text-gray-700">
-          <li className="flex items-center space-x-2">
-            <span className="text-sm">Online Status:</span>
-            <span>{onlineStatus ? "✅" : "🔴"}</span>
-          </li>
-          <li className="hover:text-blue-500 transition duration-300"><Link to="/" className="no-underline">Home</Link></li>
-          <li className="hover:text-blue-500 transition duration-300"><Link to="/about" className="no-underline">About Us</Link></li>
-          <li className="hover:text-blue-500 transition duration-300"><Link to="/contact" className="no-underline">Contact Us</Link></li>
-          <li className="hover:text-blue-500 transition duration-300"><Link to="/cart" className="no-underline">Cart</Link></li>
-          <li className="hover:text-blue-500 transition duration-300"><Link to="/grocery" className="no-underline">Grocery</Link></li>
-          <button 
-            className="login-button ml-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300"
-            onClick={() => {
-              setBtnNameReact(btnNameReact === "Login" ? "Logout" : "Login");
-            }}
-          >
-            ☢️ {btnNameReact}
-          </button>
-        </ul>
-      </div>
-    </div>
-  );
+                        <li >
+                            <h3 >{isOnline ? "✅" : "🔴"} </h3>
+
+                        </li>
+                    </ul>
+                </div>
+
+
+
+            </div>
+        </div>
+
+    )
+
 };
-
 export default Header;
